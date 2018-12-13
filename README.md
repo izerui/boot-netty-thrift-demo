@@ -1,9 +1,9 @@
 # spring boot 整合 thrift、drift(原facebook 的 nifty)、netty 构建高性能服务示例
 
-* thrift: https://thrift.apache.org/
+* thrift: https://thrift.apache.org/ (稳定)
 * nifty: https://github.com/facebookarchive/nifty (不再维护)
-* drift: https://github.com/airlift/drift
-* netty: https://netty.io/
+* drift: https://github.com/airlift/drift (活跃)
+* netty: https://netty.io/ (稳定)
 
 
 运行示例：mvn install

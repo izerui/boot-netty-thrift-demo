@@ -7,3 +7,5 @@
 
 
 运行示例：mvn install
+
+客户端调用同时支持基于注释的drift调用方式，也支持原生的 thrift 通过 example.thrift 生成的客户端调用，本例只提供第一种用例。

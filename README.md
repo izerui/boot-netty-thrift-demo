@@ -2,6 +2,7 @@
 
 * thrift: https://thrift.apache.org/ (稳定)
 * nifty: https://github.com/facebookarchive/nifty (不再维护)
+* swift: https://github.com/facebookarchive/swift (不再维护)
 * drift: https://github.com/airlift/drift (活跃)
 * netty: https://netty.io/ (稳定)
 

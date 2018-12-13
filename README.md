@@ -1,4 +1,4 @@
-# spring boot 整合 thrift、drift(原facebook 的 nifty)、netty 构建高性能服务示例
+# spring boot 整合 thrift、drift(原facebook的swift、nifty的替代品)、netty 构建高性能服务示例
 
 * thrift: https://thrift.apache.org/ (稳定)
 * nifty: https://github.com/facebookarchive/nifty (不再维护)

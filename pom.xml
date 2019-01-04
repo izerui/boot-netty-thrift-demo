@@ -51,15 +51,17 @@
 			<version>${drift.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>org.ow2.asm</groupId>
+			<artifactId>asm</artifactId>
+			<version>6.2.1</version>
+		</dependency>
+
+		<!-- 测试 -->
+		<dependency>
 			<groupId>io.airlift.drift</groupId>
 			<artifactId>drift-client</artifactId>
 			<version>${drift.version}</version>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.ow2.asm</groupId>
-			<artifactId>asm</artifactId>
-			<version>6.2.1</version>
 		</dependency>
 
 	</dependencies>
@@ -70,7 +72,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<!-- 引入drift maven插件用来生成thrift文件 -->
+			<!-- 引入drift maven插件用来生成 /src/main/resources/example.thrift 文件 -->
 			<plugin>
 				<groupId>io.airlift.drift</groupId>
 				<artifactId>drift-maven-plugin</artifactId>

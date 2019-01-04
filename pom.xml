@@ -17,7 +17,7 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<libthrift.version>0.11.0</libthrift.version>
-		<drift.version>1.15</drift.version>
+		<drift.version>1.16</drift.version>
 	</properties>
 
 	<dependencies>

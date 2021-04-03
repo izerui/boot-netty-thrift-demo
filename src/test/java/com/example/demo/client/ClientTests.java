@@ -105,5 +105,16 @@ public class ClientTests {
         System.out.println(response.getResponseBodyObject());
     }
 
+    @Test
+    public void testUUID() {
+        DriftClientFactory clientFactory = driftClientFactory();
+
+        DriftClient<IRpcService> client = clientFactory.createDriftClient(IRpcService.class);
+
+        RpcRequest request = new RpcRequest("simpleService", "uuid", null);
+        RpcResponse response = client.get().invokeMethod(request);
+        System.out.println(response.getResponseBodyObject());
+    }
+
 }
 

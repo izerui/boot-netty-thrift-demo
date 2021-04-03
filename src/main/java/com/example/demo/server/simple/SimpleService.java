@@ -3,6 +3,8 @@ package com.example.demo.server.simple;
 import com.example.demo.server.RpcException;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class SimpleService implements ISimpleService {
 
@@ -12,6 +14,10 @@ public class SimpleService implements ISimpleService {
         } else {
             throw new RpcException(100, "你不是王者荣耀");
         }
+    }
+
+    public String uuid() {
+        return UUID.randomUUID().toString();
     }
 
 }

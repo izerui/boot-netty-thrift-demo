@@ -20,4 +20,8 @@ public class SimpleService implements ISimpleService {
         return UUID.randomUUID().toString();
     }
 
+    public void print() {
+        System.out.println("技术的积分接收的");
+    }
+
 }

@@ -10,15 +10,19 @@ import com.facebook.drift.client.DriftClientFactory;
 import com.facebook.drift.client.address.AddressSelector;
 import com.facebook.drift.client.address.SimpleAddressSelector;
 import com.facebook.drift.codec.ThriftCodecManager;
+import com.facebook.drift.transport.client.DriftClientConfig;
 import com.facebook.drift.transport.netty.client.DriftNettyClientConfig;
 import com.facebook.drift.transport.netty.client.DriftNettyMethodInvokerFactory;
 import com.google.common.collect.ImmutableList;
 import com.google.common.net.HostAndPort;
+import io.airlift.units.Duration;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
 import org.springframework.util.SerializationUtils;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 public class ClientTests {
 
@@ -109,9 +113,26 @@ public class ClientTests {
     public void testUUID() {
         DriftClientFactory clientFactory = driftClientFactory();
 
-        DriftClient<IRpcService> client = clientFactory.createDriftClient(IRpcService.class);
+        DriftClientConfig driftClientConfig = new DriftClientConfig();
+        driftClientConfig.setMaxRetryTime(new Duration(10, TimeUnit.SECONDS));
+
+        DriftClient<IRpcService> client = clientFactory.createDriftClient(IRpcService.class, Optional.empty(), ImmutableList.of(), driftClientConfig);
 
         RpcRequest request = new RpcRequest("simpleService", "uuid", null);
+        RpcResponse response = client.get().invokeMethod(request);
+        System.out.println(response.getResponseBodyObject());
+    }
+
+    @Test
+    public void testPrint() {
+        DriftClientFactory clientFactory = driftClientFactory();
+
+        DriftClientConfig driftClientConfig = new DriftClientConfig();
+        driftClientConfig.setMaxRetryTime(new Duration(10, TimeUnit.SECONDS));
+
+        DriftClient<IRpcService> client = clientFactory.createDriftClient(IRpcService.class, Optional.empty(), ImmutableList.of(), driftClientConfig);
+
+        RpcRequest request = new RpcRequest("simpleService", "print", null);
         RpcResponse response = client.get().invokeMethod(request);
         System.out.println(response.getResponseBodyObject());
     }

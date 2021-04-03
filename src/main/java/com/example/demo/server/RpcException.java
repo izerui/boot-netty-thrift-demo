@@ -1,4 +1,4 @@
-package com.example.demo.server.service;
+package com.example.demo.server;
 
 import com.facebook.drift.annotations.ThriftConstructor;
 import com.facebook.drift.annotations.ThriftField;

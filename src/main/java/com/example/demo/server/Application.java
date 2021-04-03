@@ -1,6 +1,7 @@
 package com.example.demo.server;
 
-import com.example.demo.server.service.ExampleService;
+import com.example.demo.server.rpc.RpcService;
+import com.example.demo.server.simple.SimpleService;
 import com.facebook.drift.codec.ThriftCodecManager;
 import com.facebook.drift.server.DriftServer;
 import com.facebook.drift.server.DriftService;
@@ -20,7 +21,9 @@ import java.util.Optional;
 public class Application {
 
     @Autowired
-    private ExampleService exampleService;
+    private SimpleService exampleService;
+    @Autowired
+    private RpcService rpcService;
 
     @Bean
     public DriftServer driftServer(RpcProperties config) {
@@ -29,9 +32,11 @@ public class Application {
                 new ThriftCodecManager(),
                 new NullMethodInvocationStatsFactory(),
                 ImmutableSet.of(
-                        new DriftService(exampleService, Optional.empty(), true)
+                        new DriftService(exampleService, Optional.empty(), true),
+                        new DriftService(rpcService, Optional.empty(), true)
                 ),
                 ImmutableSet.of());
+        System.out.println("端口开始监听于: " + config.getPort());
         return driftServer;
     }
 

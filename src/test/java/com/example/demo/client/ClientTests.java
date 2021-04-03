@@ -1,6 +1,10 @@
 package com.example.demo.client;
 
-import com.example.demo.server.service.UserName;
+import com.example.demo.server.rpc.IRpcService;
+import com.example.demo.server.rpc.RpcRequest;
+import com.example.demo.server.rpc.RpcResponse;
+import com.example.demo.server.simple.ISimpleService;
+import com.example.demo.server.simple.UserName;
 import com.facebook.drift.client.DriftClient;
 import com.facebook.drift.client.DriftClientFactory;
 import com.facebook.drift.client.address.AddressSelector;
@@ -10,7 +14,9 @@ import com.facebook.drift.transport.netty.client.DriftNettyClientConfig;
 import com.facebook.drift.transport.netty.client.DriftNettyMethodInvokerFactory;
 import com.google.common.collect.ImmutableList;
 import com.google.common.net.HostAndPort;
+import org.assertj.core.util.Lists;
 import org.junit.Test;
+import org.springframework.util.SerializationUtils;
 
 import java.util.List;
 
@@ -40,11 +46,12 @@ public class ClientTests {
 
         DriftClientFactory clientFactory = driftClientFactory();
 
-        DriftClient<TestExampleService> client = clientFactory.createDriftClient(TestExampleService.class);
+        DriftClient<ISimpleService> client = clientFactory.createDriftClient(ISimpleService.class);
 
 
         UserName userName = new UserName();
         userName.name = "王者荣耀";
+        userName.data = SerializationUtils.serialize(Lists.newArrayList("a","b","c"));
 
         try {
             String helloWorld = client.get().hello(userName);
@@ -70,7 +77,7 @@ public class ClientTests {
 
         DriftClientFactory clientFactory = driftClientFactory();
 
-        DriftClient<TestExampleService> client = clientFactory.createDriftClient(TestExampleService.class);
+        DriftClient<ISimpleService> client = clientFactory.createDriftClient(ISimpleService.class);
 
         UserName userName = new UserName();
         userName.name = "王者荣耀22";
@@ -81,6 +88,21 @@ public class ClientTests {
         }
 
 
+    }
+
+
+    @Test
+    public void testRpc() {
+        DriftClientFactory clientFactory = driftClientFactory();
+
+        DriftClient<IRpcService> client = clientFactory.createDriftClient(IRpcService.class);
+
+        UserName userName = new UserName();
+        userName.name = "王者荣耀";
+
+        RpcRequest request = new RpcRequest("simpleService","hello",userName);
+        RpcResponse response = client.get().invokeMethod(request);
+        System.out.println(response.getResponseBodyObject(String.class));
     }
 
 }

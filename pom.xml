@@ -16,8 +16,8 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<libthrift.version>0.11.0</libthrift.version>
-		<drift.version>1.16</drift.version>
+		<libthrift.version>0.12.0</libthrift.version>
+		<drift.version>1.32</drift.version>
 	</properties>
 
 	<dependencies>
@@ -41,24 +41,19 @@
 
 		<!-- 引入drift依赖 -->
 		<dependency>
-			<groupId>io.airlift.drift</groupId>
+			<groupId>com.facebook.drift</groupId>
 			<artifactId>drift-transport-netty</artifactId>
 			<version>${drift.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>io.airlift.drift</groupId>
+			<groupId>com.facebook.drift</groupId>
 			<artifactId>drift-server</artifactId>
 			<version>${drift.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ow2.asm</groupId>
-			<artifactId>asm</artifactId>
-			<version>6.2.1</version>
 		</dependency>
 
 		<!-- 测试 -->
 		<dependency>
-			<groupId>io.airlift.drift</groupId>
+			<groupId>com.facebook.drift</groupId>
 			<artifactId>drift-client</artifactId>
 			<version>${drift.version}</version>
 			<scope>test</scope>
@@ -74,7 +69,7 @@
 			</plugin>
 			<!-- 引入drift maven插件用来生成 /src/main/resources/example.thrift 文件 -->
 			<plugin>
-				<groupId>io.airlift.drift</groupId>
+				<groupId>com.facebook.drift</groupId>
 				<artifactId>drift-maven-plugin</artifactId>
 				<version>${drift.version}</version>
 				<executions>
@@ -87,7 +82,7 @@
 				<configuration>
 					<outputFile>${project.basedir}/src/main/resources/example.thrift</outputFile>
 					<classes>
-						<class>com.example.demo.service.ExampleService</class>
+						<class>com.example.demo.client.service.ExampleService</class>
 					</classes>
 					<recursive>true</recursive>
 					<namespaces>

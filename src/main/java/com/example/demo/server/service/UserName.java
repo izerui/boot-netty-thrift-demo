@@ -1,7 +1,7 @@
-package com.example.demo.service;
+package com.example.demo.server.service;
 
-import io.airlift.drift.annotations.ThriftField;
-import io.airlift.drift.annotations.ThriftStruct;
+import com.facebook.drift.annotations.ThriftField;
+import com.facebook.drift.annotations.ThriftStruct;
 
 @ThriftStruct
 public class UserName {

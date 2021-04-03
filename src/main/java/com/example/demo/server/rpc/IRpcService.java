@@ -8,5 +8,5 @@ import com.facebook.drift.annotations.ThriftService;
 public interface IRpcService {
 
     @ThriftMethod
-    public RpcResponse invokeMethod(RpcRequest request) throws RpcException;
+    RpcResponse invokeMethod(RpcRequest request) throws RpcException;
 }

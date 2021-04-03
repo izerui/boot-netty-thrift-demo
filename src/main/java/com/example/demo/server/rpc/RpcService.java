@@ -8,6 +8,8 @@ import org.springframework.util.ReflectionUtils;
 import org.springframework.util.SerializationUtils;
 
 import java.lang.reflect.Method;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class RpcService implements IRpcService {
@@ -19,10 +21,11 @@ public class RpcService implements IRpcService {
         Object bean = applicationContext.getBean(request.beanName);
         Method method;
         Object result;
-        if (request.requestBody != null) {
-            Object param = SerializationUtils.deserialize(request.requestBody);
-            method = ReflectionUtils.findMethod(bean.getClass(), request.methodName, param.getClass());
-            result = ReflectionUtils.invokeMethod(method, bean, param);
+        if (request.params != null) {
+            Object[] objects = request.params.stream().map(bytes -> SerializationUtils.deserialize(bytes)).toArray();
+            List<? extends Class<?>> collect = request.params.stream().map(bytes -> SerializationUtils.deserialize(bytes).getClass()).collect(Collectors.toList());
+            method = ReflectionUtils.findMethod(bean.getClass(), request.methodName, collect.toArray(new Class[collect.size()]));
+            result = ReflectionUtils.invokeMethod(method, bean, objects);
         } else {
             method = ReflectionUtils.findMethod(bean.getClass(), request.methodName);
             result = ReflectionUtils.invokeMethod(method, bean);

@@ -23,7 +23,7 @@ public class RpcResponse {
     @ThriftField(value = 3, requiredness = ThriftField.Requiredness.OPTIONAL)
     public byte[] responseBody;
 
-    public <R extends Object> R getResponseBodyObject(Class<R> rClass) {
-        return (R)SerializationUtils.deserialize(responseBody);
+    public Object getResponseBodyObject() {
+        return SerializationUtils.deserialize(responseBody);
     }
 }

@@ -51,7 +51,7 @@ public class ClientTests {
 
         UserName userName = new UserName();
         userName.name = "王者荣耀";
-        userName.data = SerializationUtils.serialize(Lists.newArrayList("a","b","c"));
+        userName.data = SerializationUtils.serialize(Lists.newArrayList("a", "b", "c"));
 
         try {
             String helloWorld = client.get().hello(userName);
@@ -65,7 +65,7 @@ public class ClientTests {
             System.out.println("");
             System.out.println("");
             System.out.println("======================================================");
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 
@@ -83,7 +83,7 @@ public class ClientTests {
         userName.name = "王者荣耀22";
         try {
             String helloWorld = client.get().hello(userName);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 
@@ -100,9 +100,9 @@ public class ClientTests {
         UserName userName = new UserName();
         userName.name = "王者荣耀";
 
-        RpcRequest request = new RpcRequest("simpleService","hello",userName);
+        RpcRequest request = new RpcRequest("simpleService", "hello", Lists.newArrayList(userName));
         RpcResponse response = client.get().invokeMethod(request);
-        System.out.println(response.getResponseBodyObject(String.class));
+        System.out.println(response.getResponseBodyObject());
     }
 
 }

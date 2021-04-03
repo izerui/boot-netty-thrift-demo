@@ -19,7 +19,7 @@ public class ClientTests {
 
     public DriftClientFactory driftClientFactory() {
         // server address
-        List<HostAndPort> addresses = ImmutableList.of(HostAndPort.fromParts("localhost", 40001));
+        List<HostAndPort> addresses = ImmutableList.of(HostAndPort.fromParts("localhost", 41001));
 
         // expensive services that should only be created once
         ThriftCodecManager codecManager = new ThriftCodecManager();

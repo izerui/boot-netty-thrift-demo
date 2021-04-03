@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Bean;
 
 import java.util.Optional;
 
-@EnableConfigurationProperties(DriftProperties.class)
+@EnableConfigurationProperties(RpcProperties.class)
 @SpringBootApplication
 public class Application {
 
@@ -23,7 +23,7 @@ public class Application {
     private ExampleService exampleService;
 
     @Bean
-    public DriftServer driftServer(DriftProperties config) {
+    public DriftServer driftServer(RpcProperties config) {
         DriftServer driftServer = new DriftServer(
                 new DriftNettyServerTransportFactory(config),
                 new ThriftCodecManager(),
